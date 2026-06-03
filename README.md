@@ -63,6 +63,8 @@ After execution, files named `status.log` and `status.csv` will be generated.
 
 ## Example Output
 
+### Log Output
+
 ```text
 Website Status Report
 =====================
@@ -84,6 +86,16 @@ Unhealthy: 0
 
 Generated on: 03-06-2026 18:30:15
 Script runtime: 0.45 seconds
+```
+
+### CSV Output
+
+```csv
+url,status_code,status,healthy,category,success,response_time_seconds,checked_at
+https://google.com,200,UP,True,Success,True,0.214,2026-06-03 18:30:15
+https://github.com,200,UP,True,Success,True,0.320,2026-06-03 18:30:15
+https://microsoft.com,200,UP,True,Success,True,0.487,2026-06-03 18:30:15
+https://api.github.com,200,UP,True,Success,True,0.158,2026-06-03 18:30:15
 ```
 
 ## Skills Practiced
