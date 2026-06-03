@@ -91,12 +91,14 @@ Script runtime: 0.45 seconds
 ### CSV Output
 
 ```csv
-url,status_code,status,healthy,category,success,response_time_seconds,checked_at
-https://google.com,200,UP,True,Success,True,0.214,2026-06-03 18:30:15
-https://github.com,200,UP,True,Success,True,0.320,2026-06-03 18:30:15
-https://microsoft.com,200,UP,True,Success,True,0.487,2026-06-03 18:30:15
-https://api.github.com,200,UP,True,Success,True,0.158,2026-06-03 18:30:15
+Url,Status_code,Status,Healthy,Category,Success,Response_time_seconds,Error
+https://google.com,200,UP,True,Success,True,0.214,
+https://github.com,200,UP,True,Success,True,0.320,
+https://microsoft.com,200,UP,True,Success,True,0.487,
+https://api.github.com,200,UP,True,Success,True,0.158,
 ```
+
+> Note: the `Error` column is included in the CSV export, but it is only populated for checks that fail or raise a network/timeout exception.
 
 ## Skills Practiced
 
