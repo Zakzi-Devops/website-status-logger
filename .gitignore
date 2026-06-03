@@ -1,0 +1,14 @@
+# Ignore generated log and report files
+*.log
+*.csv
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# Environment files
+.env
+venv/
+
+# Editor folders
+.vscode/
