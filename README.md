@@ -1,6 +1,6 @@
 # Website Status Logger
 
-A Python automation script that checks the availability of websites, records their status, and generates a timestamped log report.
+A Python-based monitoring tool that checks website and API availability, measures response times, classifies HTTP responses, handles connection errors, and generates timestamped log and CSV reports.
 
 ## Features
 
