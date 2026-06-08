@@ -101,6 +101,13 @@ https://api.github.com,200,UP,True,Success,True,0.158,
 
 > Note: the `Error` column is included in the CSV export, but it is only populated for checks that fail or raise a network/timeout exception.
 
+## Ignored Files
+
+Generated files such as `.log` and `.csv` reports are excluded from version control using `.gitignore`.
+
+The project also ignores Python cache files, virtual environments, environment files, and editor-specific folders.
+
+
 ## Skills Practiced
 
 This project was built to practice:
