@@ -2,34 +2,71 @@
 
 A Python-based monitoring tool that checks website and API availability, measures response times, classifies HTTP responses, handles connection errors, and generates timestamped log and CSV reports.
 
-## Features
+---
+
+# Version
+
+**Current Version:** v2.0
+
+### What's New in v2.0
+
+* Dockerized application
+* Added Dockerfile
+* Added .dockerignore
+* Added volume support for report persistence
+* Reports can be generated directly from a Docker container
+
+---
+
+# Features
 
 * Reads website URLs from a file (`websites.txt`)
-* Checks website availability using HTTP requests
+* Checks website and API availability using HTTP requests
 * Displays HTTP status codes
-* Classifies results as `UP` or `DOWN`
+* Classifies results as UP or DOWN
 * Measures website response times
-* Categorizes responses (Success / Redirect / Client Error / Server Error / Connection Error)
+* Categorizes responses:
+
+  * Success
+  * Redirect
+  * Client Error
+  * Server Error
+  * Connection Error
+  * Timeout Error
+  * SSL Error
 * Handles unreachable websites without crashing
-* Generates a detailed log file (`status.log`)
+* Generates a detailed log report (`status.log`)
 * Exports results to CSV (`status.csv`)
 * Provides a summary of healthy and unhealthy checks
-* Includes a report generation timestamp and script runtime
+* Includes report generation timestamp
+* Includes script runtime measurement
+* Dockerized for portable and consistent execution
+* Supports volume mounts to save reports outside the container
 
-## Project Structure
+---
+
+# Project Structure
 
 ```text
 Website_Status_Logger/
 │
 ├── website_checker.py
 ├── websites.txt
-├── status.log
-├── status.csv
+├── output/
+│   ├── status.log
+│   └── status.csv
+├── Dockerfile
+├── .dockerignore
 ├── requirements.txt
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
-## Requirements
+---
+
+# Requirements
+
+## Local Execution
 
 * Python 3.10+
 * requests
@@ -40,19 +77,32 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-## Configuration
+## Docker Execution
 
-Add the websites you want to monitor to `websites.txt`:
+* Docker Desktop
+* Docker Engine
+
+---
+
+# Configuration
+
+Add the websites or APIs you want to monitor to `websites.txt`.
+
+Example:
 
 ```text
 https://google.com
 https://github.com
 https://microsoft.com
 https://api.github.com
+https://jsonplaceholder.typicode.com/posts
 ```
 
+---
 
-## Usage
+# Usage
+
+## Local Python Execution
 
 Run the script:
 
@@ -60,11 +110,68 @@ Run the script:
 python website_checker.py
 ```
 
-After execution, files named `status.log` and `status.csv` will be generated.
+After execution, reports will be generated in:
 
-## Example Output
+```text
+output/status.log
+output/status.csv
+```
 
-### Log Output
+---
+
+# Docker Usage
+
+## Build the Docker Image
+
+```bash
+docker build -t website-status-logger .
+```
+
+## Create Output Directory
+
+```bash
+mkdir output
+```
+
+## Run the Container
+
+### PowerShell (Recommended)
+
+```powershell
+docker run --rm -v "${PWD}/output:/app/output" website-status-logger
+```
+
+### Git Bash
+
+If path conversion issues occur in Git Bash, use an absolute Windows path:
+
+```bash
+docker run --rm -v "C:/Users/your-user/Devops/Website_Status_Logger/output:/app/output" website-status-logger
+```
+
+After execution, reports will be available in:
+
+```text
+output/status.log
+output/status.csv
+```
+
+---
+
+# Dockerfile Overview
+
+The Dockerfile:
+
+* Uses `python:3.12-slim` as the base image
+* Sets `/app` as the working directory
+* Installs Python dependencies from `requirements.txt`
+* Copies project files into the container
+* Creates an `/app/output` directory for generated reports
+* Runs `website_checker.py` when the container starts
+
+---
+
+# Example Log Output
 
 ```text
 Website Status Report
@@ -89,7 +196,9 @@ Generated on: 03-06-2026 18:30:15
 Script runtime: 0.45 seconds
 ```
 
-### CSV Output
+---
+
+# Example CSV Output
 
 ```csv
 Url,Status_code,Status,Healthy,Category,Success,Response_time_seconds,Error
@@ -99,16 +208,40 @@ https://microsoft.com,200,UP,True,Success,True,0.487,
 https://api.github.com,200,UP,True,Success,True,0.158,
 ```
 
-> Note: the `Error` column is included in the CSV export, but it is only populated for checks that fail or raise a network/timeout exception.
+**Note:** The `Error` column is included in the CSV export and is populated only when a request fails or raises an exception.
 
-## Ignored Files
+---
 
-Generated files such as `.log` and `.csv` reports are excluded from version control using `.gitignore`.
+# Ignored Files
 
-The project also ignores Python cache files, virtual environments, environment files, and editor-specific folders.
+This project uses both `.gitignore` and `.dockerignore`.
 
+## .gitignore
 
-## Skills Practiced
+The `.gitignore` file excludes files from Git version control, such as:
+
+* Generated `.log` and `.csv` reports
+* Python cache files
+* Virtual environments
+* Environment files
+* VS Code settings
+
+## .dockerignore
+
+The `.dockerignore` file excludes unnecessary files from the Docker build context, such as:
+
+* `.git`
+* Python cache files
+* Generated `.log` and `.csv` reports
+* Virtual environments
+* Environment files
+* VS Code settings
+
+This keeps the Git repository clean and helps keep Docker images smaller and builds faster.
+
+---
+
+# Skills Practiced
 
 This project was built to practice:
 
@@ -119,16 +252,54 @@ This project was built to practice:
 * Exception handling
 * HTTP requests with the requests library
 * Logging and reporting
+* CSV generation
+* Docker fundamentals
+* Docker images and containers
+* Docker volume mounts
 * Basic monitoring concepts used in DevOps
 
-## Future Improvements
+---
 
+# Future Improvements
+
+* Add GitHub Actions CI/CD pipeline
+* Publish Docker image to Docker Hub
+* Deploy the application to Azure
+* Add email or Teams notifications
+* Add JSON output format
 * Add colored terminal output
-* Send email notifications for failed websites
-* Read configuration from a JSON file
-* Schedule execution with Cron or Task Scheduler
-* Containerize the application with Docker
+* Read configuration from a JSON or YAML file
+* Schedule execution with Cron or Windows Task Scheduler
 
-## Author
+---
 
-Built as part of a DevOps learning journey focused on automation, monitoring, and Python scripting.
+# Version History
+
+## v2.0
+
+* Dockerized application
+* Added Dockerfile
+* Added .dockerignore
+* Added volume support for report persistence
+
+## v1.0
+
+* Website and API monitoring
+* CSV report generation
+* Log report generation
+* Response time measurements
+* Error handling and categorization
+
+---
+
+# Author
+
+Built as part of a DevOps learning journey focused on:
+
+* Linux
+* Python Automation
+* Git & GitHub
+* Docker
+* Monitoring
+* CI/CD
+* Cloud & DevOps Engineering
