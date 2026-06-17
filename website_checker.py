@@ -5,8 +5,8 @@ from datetime import datetime
 
 
 website_file = "websites.txt"
-log_file = "status.log"
-csv_file = "status.csv"
+log_file = "output/status.log"
+csv_file = "output/status.csv"
 TIMEOUT = 10
 
 def read_websites(file_path):
@@ -144,5 +144,5 @@ script_runtime = end_time - start_time
 
 write_log(website_results, script_runtime)
 
-print("Reports saved to status.log and status.csv")
+print("Reports saved to output/status.log and output/status.csv")
 print(f"Script completed in {script_runtime:.2f} seconds")
