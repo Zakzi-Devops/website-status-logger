@@ -1,5 +1,7 @@
 # Website Status Logger
 
+[![Python Check](https://github.com/Zakzi-Devops/website-status-logger/actions/workflows/python-check.yml/badge.svg)](https://github.com/Zakzi-Devops/website-status-logger/actions/workflows/python-check.yml)
+
 A Python-based monitoring tool that checks website and API availability, measures response times, classifies HTTP responses, handles connection errors, and generates timestamped log and CSV reports.
 
 ---
