@@ -1,0 +1,30 @@
+# .github/workflows/python-check.yml
+
+name: Python Check
+
+on:
+    push:
+        branches: [ main ]
+    pull_request:
+        branches: [ main ]
+
+
+jobs:
+    run-script:
+        runs-on: ubunto-latest
+    
+
+    steps:
+        - name: Checkout repositry
+          uses: actions/checkout@v6
+
+        - name: Set up Python
+          uses: actions/python-setup@v5
+          with:
+            python-version: '3.12'
+
+        - name: Install dependencies
+          run: pip install -r requirements.txt
+
+        - name: Run Website Status Logger
+          run: python website_checker.py
