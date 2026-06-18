@@ -167,6 +167,30 @@ output/status.csv
 
 ---
 
+# Docker Hub
+
+The Docker image is automatically built and pushed to Docker Hub by the GitHub Actions CI/CD pipeline.
+
+Image:
+
+```text
+zakzi/website-status-logger:latest
+```
+
+Pull the image:
+
+```bash
+docker pull zakzi/website-status-logger:latest
+```
+
+Run the image:
+
+```powershell
+docker run --rm -v "${PWD}/output:/app/output" zakzi/website-status-logger:latest
+```
+
+---
+
 # Dockerfile Overview
 
 The Dockerfile:
