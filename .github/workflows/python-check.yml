@@ -14,7 +14,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v6
+              uses: actions/checkout@v4
 
             - name: Set up Python
               uses: actions/setup-python@v5
@@ -30,7 +30,16 @@ jobs:
             - name: Run Website Status Logger
               run: python website_checker.py
 
-            - name: Build Docker Image
-              run: docker build -t website-status-logger .
+            - name: Log in to Docker Hub
+              uses: docker/login-action@v3
+              with:
+                username: ${{ secrets.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: Build & push Docker Image
+              uses: docker/build-push-action@v6
+              with:
+                push: true
+                tags: zakzi/website-status-logger:latest
             
 
