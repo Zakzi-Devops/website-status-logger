@@ -8,15 +8,15 @@ A Python-based monitoring tool that checks website and API availability, measure
 
 # Version
 
-**Current Version:** v2.0
+**Current Version:** v3.0
 
-### What's New in v2.0
+### What's New in v3.0
 
-* Dockerized application
-* Added Dockerfile
-* Added .dockerignore
-* Added volume support for report persistence
-* Reports can be generated directly from a Docker container
+- Added GitHub Actions CI/CD workflow
+- Automatically runs the Python monitoring script on push and pull requests
+- Builds the Docker image in CI
+- Logs in to Docker Hub using GitHub Secrets
+- Pushes the Docker image to Docker Hub automatically
 
 ---
 
@@ -44,6 +44,8 @@ A Python-based monitoring tool that checks website and API availability, measure
 * Includes script runtime measurement
 * Dockerized for portable and consistent execution
 * Supports volume mounts to save reports outside the container
+* GitHub Actions CI/CD pipeline
+* Automatic Docker image build and push to Docker Hub
 
 ---
 
@@ -52,6 +54,11 @@ A Python-based monitoring tool that checks website and API availability, measure
 ```text
 Website_Status_Logger/
 │
+├── .github/
+│   └── workflows/
+│       └── python-check.yml
+├── Screenshots/
+│   └── github-actions-success.png
 ├── website_checker.py
 ├── websites.txt
 ├── output/
@@ -173,6 +180,41 @@ The Dockerfile:
 
 ---
 
+# CI/CD Pipeline
+
+This project uses GitHub Actions to automatically validate and package the application.
+
+The workflow runs on:
+
+- Push to `main`
+- Pull requests targeting `main`
+
+Pipeline steps:
+
+1. Check out the repository
+2. Set up Python
+3. Install dependencies
+4. Create the output directory
+5. Run the Website Status Logger script
+6. Build the Docker image
+7. Log in to Docker Hub using GitHub Secrets
+8. Push the Docker image to Docker Hub
+
+Required GitHub Secrets:
+
+- `DOCKERHUB_USERNAME`
+- `DOCKERHUB_TOKEN`
+
+---
+
+# Screenshots
+
+## GitHub Actions Pipeline
+
+![GitHub Actions Success](Screenshots/github-actions-success.png)
+
+---
+
 # Example Log Output
 
 ```text
@@ -259,23 +301,35 @@ This project was built to practice:
 * Docker images and containers
 * Docker volume mounts
 * Basic monitoring concepts used in DevOps
+* GitHub Actions workflows
+* Continuous Integration (CI)
+* Docker Hub image publishing
+* Secrets management
+* CI/CD pipeline automation
 
 ---
 
 # Future Improvements
 
-* Add GitHub Actions CI/CD pipeline
-* Publish Docker image to Docker Hub
 * Deploy the application to Azure
 * Add email or Teams notifications
 * Add JSON output format
 * Add colored terminal output
 * Read configuration from a JSON or YAML file
 * Schedule execution with Cron or Windows Task Scheduler
+* Add automated Docker image versioning
+* Add automated release creation
 
 ---
 
 # Version History
+
+## v3.0
+
+* Added GitHub Actions CI/CD workflow
+* Added automated Docker image build
+* Added Docker Hub publishing
+* Added CI/CD validation on push and pull requests
 
 ## v2.0
 
@@ -305,3 +359,4 @@ Built as part of a DevOps learning journey focused on:
 * Monitoring
 * CI/CD
 * Cloud & DevOps Engineering
+
