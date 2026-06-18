@@ -24,5 +24,8 @@ jobs:
             - name: Install dependencies
               run: pip install -r requirements.txt
 
+            - name: Create Output directory
+              run: mkdir -p output
+
             - name: Run Website Status Logger
               run: python website_checker.py
