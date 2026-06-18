@@ -29,3 +29,8 @@ jobs:
 
             - name: Run Website Status Logger
               run: python website_checker.py
+
+            - name: Build Docker Image
+              run: docker build -t website-status-logger .
+            
+
